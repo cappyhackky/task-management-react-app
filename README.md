@@ -50,6 +50,11 @@ This is a task management application built with React. That allows users to cre
 - Filter tasks based on priority and search for specific tasks.
 - Track upcoming, overdue, and completed tasks.
 - Veiw the list of completed tasks seperately.
+## User Interface
+- Dashboard
+![Dashboard](/public/img/UI/Dashboard.png)
+- Add New Task
+![Dashboard](/public/img/UI/AddTask.png)
 
 ## Acknowledgments
 
