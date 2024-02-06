@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path='/task-management-react-app' Component={TaskList} />
           <Route path='add-task' Component={TaskForm} />
-          <Route path='/*' Component={Error404} />
+          <Route path='/*' Component={TaskList} />
         </Routes>
         <Footer/>
       </Router>
