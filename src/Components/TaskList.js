@@ -22,6 +22,7 @@ const TaskList = () => {
     console.log(updatedTasks);
     localStorage.setItem('tasks', JSON.stringify(updatedTasks));
     setTasks(updatedTasks);
+    toast.success("Task Deleted!!!");
   };
 
   const editTask = (taskId) => {
@@ -60,16 +61,6 @@ const TaskList = () => {
     return ((tasks.filter((task) => task.status === 'completed')).length);
   };
 
-
-  // const handlePriorityChange = (priority) => {
-  //   setFilterPriority(priority);
-  //   filterTasks(searchTerm, priority, !showCompleted);
-  // };
-
-  // const searchTasks = (searchQuery) => {
-  //   setSearchTerm(searchQuery);
-  //   filterTasks(searchQuery, filterPriority, !showCompleted);
-  // };
   const toggleShowCompleted = () => {
     setShowCompleted(!showCompleted);
     let filteredTasks = initialTasks.slice();
@@ -78,29 +69,6 @@ const TaskList = () => {
     }
     setTasks(filteredTasks);
   };
-
-
-  // const filterTasks = (searchTerm, priority, hideCompleted) => {
-  //   console.log(priority);
-  //   let filteredTasks = initialTasks.slice();
-  //   if (filterPriority !== 'All') {
-  //     filteredTasks = filteredTasks.filter((task) => task.priority === priority);
-  //   }
-  //   if (hideCompleted) {
-  //     filteredTasks = filteredTasks.filter((task) => task.status !== 'completed');
-  //   }
-  //   if (searchTerm !== '') {
-  //     filteredTasks = filteredTasks.filter(
-  //       (task) =>
-  //         task.taskId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //         task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //         task.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-  //         task.priority.toLowerCase().includes(searchTerm.toLowerCase())
-  //     );
-  //   }
-  //   setTasks(filteredTasks);
-  // }
-
 
   //Search functionality
 
@@ -162,9 +130,9 @@ const TaskList = () => {
         setTasks={setTasks}
       />)}
       <ToastContainer />
-      <div className="container-fluid row">
-        <div className="bg-mgreen col-md-3 p-3 d-flex justify-content-center align-items-center vh-100">
-          <div className="flex-column container-fluid">
+      <div className="row vh-100 gx-0">
+        <div className="bg-mgreen col-md-3 d-flex align-items-center py-5">
+          <div className="px-3 py-5">
             <div className="card hover shadow mb-3">
               <div className="card-body text-dark">
                 <div className="row" role='button'>
@@ -191,114 +159,123 @@ const TaskList = () => {
             </div>
           </div>
         </div>
-        <div className="col-md-9 p-5 mt-4">
-          <h2>Task List</h2>
-          <hr />
-          <div className="mt-5 d-flex justify-content-between pb-4">
-            <div>
-              <select
-                className="form-control"
-                value={filterPriority}
-                onChange={(e) => handlePriorityChange(e.target.value)}
-              >
-                <option value="All">All Priorities</option>
-                <option value="High">High</option>
-                <option value="Medium">Medium</option>
-                <option value="Low">Low</option>
-              </select>
+        <div className="col-md-9 container p-5">
+          <div className="pt-3">
+            <h2>Task List</h2>
+            <hr />
+            <div className="row py-4 bg-teal rounded">
+
+              <div className="col-md-3 pt-2">
+                <div className="btn btn-success w-100">
+                  <a href='/add-task' className="text-decoration-none link-light"><FaPlus /> Add Task</a>
+                </div>
+              </div>
+              <div className="col-md-3 pt-2">
+                <select
+                  className="form-control"
+                  value={filterPriority}
+                  onChange={(e) => handlePriorityChange(e.target.value)}
+                >
+                  <option value="All">All Priorities</option>
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+              </div>
+
+
+              <div className="col-md-3 pt-2">
+                <input
+                  className="form-control"
+                  type="text"
+                  placeholder="Search"
+                  value={searchTerm}
+                  onChange={(e) => searchTasks(e.target.value)}
+                />
+              </div>
+
+              <div className="col-md-3 pt-2">
+                <div className="p-2">
+                  <input
+                    className="form-check-input me-2"
+                    type="checkbox"
+                    id="showCompleted"
+                    checked={showCompleted}
+                    onChange={toggleShowCompleted}
+                  />
+                  <label className="form-check-label text-success " htmlFor="showCompleted">Completed Tasks</label>
+                </div>
+              </div>
+
             </div>
-
-
-            <div className="d-flex">
-              <input
-                className="form-control"
-                type="text"
-                placeholder="Search"
-                value={searchTerm}
-                onChange={(e) => searchTasks(e.target.value)}
-              />
+            <div className="table-responsive">
+              <table className="table text-center table-hover">
+                <thead>
+                  <tr className="">
+                    <th>Task ID</th>
+                    <th>Title</th>
+                    <th>Priority</th>
+                    <th>Due Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {currentTasks.map((task) => (
+                    <tr className={`${(task.status === "completed") ? "table-info" : ""}`} key={task.taskId}>
+                      <td>{task.taskId}</td>
+                      <td>{task.title}</td>
+                      <td>{task.priority}</td>
+                      <td>{task.dueDate}</td>
+                      <td className="d-flex justify-content-around">
+                        <button
+                          className="btn btn-danger btn-sm"
+                          title="Delete"
+                          onClick={() => deleteTask(task.taskId)}
+                        >
+                          <FaTrash />
+                        </button>
+                        <button
+                          className="btn btn-warning btn-sm"
+                          title="Edit"
+                          onClick={() => editTask(task.taskId)}
+                        >
+                          <FaEdit />
+                        </button>
+                        <button
+                          className="btn btn-primary btn-sm"
+                          title="View"
+                          onClick={() => viewTask(task.taskId)}
+                        >
+                          <FaEye />
+                        </button>
+                        <button
+                          className="btn btn-success btn-sm"
+                          title="Completed"
+                          id={task.taskId}
+                          disabled={(task.status === "completed")}
+                          onClick={() => completedTask(task.taskId)}
+                        >
+                          <FaRegCheckCircle />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-
-            <div className="form-check">
-              <input
-                className="form-check-input"
-                type="checkbox"
-                id="showCompleted"
-                checked={showCompleted}
-                onChange={toggleShowCompleted}
-              />
-              <label className="form-check-label" htmlFor="showCompleted">
-                Completed Tasks
-              </label>
-            </div>
-
-            <a href='/add-task' className="btn btn-success"><FaPlus /> Add Task</a>
+            {/* Pagination buttons  */}
+            <nav>
+              <ul className="pagination">
+                {pageNumbers.map((number) => (
+                  <li key={number} className={`page-item ${currentPage === number ? 'active' : ''}`}>
+                    <div role="button" onClick={() => setCurrentPage(number)} className="page-link">
+                      {number}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
-          <table className="table text-center table-hover">
-            <thead>
-              <tr>
-                <th>Task ID</th>
-                <th>Title</th>
-                <th>Priority</th>
-                <th>Due Date</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentTasks.map((task) => (
-                <tr className={`${(task.status === "completed") ? "table-info" : ""}`} key={task.taskId}>
-                  <td>{task.taskId}</td>
-                  <td>{task.title}</td>
-                  <td>{task.priority}</td>
-                  <td>{task.dueDate}</td>
-                  <td className="d-flex justify-content-around">
-                    <button
-                      className="btn btn-danger btn-sm"
-                      title="Delete"
-                      onClick={() => deleteTask(task.taskId)}
-                    >
-                      <FaTrash />
-                    </button>
-                    <button
-                      className="btn btn-warning btn-sm"
-                      title="Edit"
-                      onClick={() => editTask(task.taskId)}
-                    >
-                      <FaEdit />
-                    </button>
-                    <button
-                      className="btn btn-primary btn-sm"
-                      title="View"
-                      onClick={() => viewTask(task.taskId)}
-                    >
-                      <FaEye />
-                    </button>
-                    <button
-                      className="btn btn-success btn-sm"
-                      title="Completed"
-                      id={task.taskId}
-                      disabled={!(task.status === "completed")}
-                      onClick={() => completedTask(task.taskId)}
-                    >
-                      <FaRegCheckCircle />
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          {/* Pagination buttons  */}
-          <nav>
-            <ul className="pagination">
-              {pageNumbers.map((number) => (
-                <li key={number} className={`page-item ${currentPage === number ? 'active' : ''}`}>
-                  <div role="button" onClick={() => setCurrentPage(number)} className="page-link">
-                    {number}
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </nav>
         </div>
       </div>
     </>

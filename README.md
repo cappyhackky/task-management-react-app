@@ -21,7 +21,7 @@ This is a task management application built with React. That allows users to cre
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/cappyhackky/task-management.git
+   git clone https://github.com/cappyhackky/task-management-react-app.git
    ```
 
 2. Navigate to the project directory:
@@ -64,6 +64,6 @@ This is a task management application built with React. That allows users to cre
 
 ## Feedback and Issues
 
-Feel free to [open an issue](https://github.com/cappyhackky/task-management/issues) for feedback or if you encounter any issues.
+Feel free to [open an issue](https://github.com/cappyhackky/task-management-react-app/issues) for feedback or if you encounter any issues.
 
 Happy task managing!

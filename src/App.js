@@ -7,6 +7,7 @@ import TaskForm from './Components/TaskForm';
 import NavBar from './Components/NavBar';
 import TaskList from './Components/TaskList';
 import Error404 from './Components/Error404';
+import Footer from './Components/Footer';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='add-task' Component={TaskForm} />
           <Route path='/*' Component={Error404} />
         </Routes>
+        <Footer/>
       </Router>
     </>
   );
