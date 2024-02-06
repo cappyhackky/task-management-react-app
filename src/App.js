@@ -12,11 +12,11 @@ import Footer from './Components/Footer';
 function App() {
   return (
     <>
-      <Router basename="https://cappyhackky.github.io/task-management-react-app/">
+      <Router basename="task-management-react-app">
         <NavBar />
         <Routes>
           <Route path='/task-management-react-app' Component={TaskList} />
-          <Route path='add-task' Component={TaskForm} />
+          <Route path='/add-task' Component={TaskForm} />
           <Route path='/*' Component={TaskList} />
         </Routes>
         <Footer/>
