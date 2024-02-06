@@ -15,7 +15,7 @@ function App() {
       <Router basename="https://cappyhackky.github.io/task-management-react-app/">
         <NavBar />
         <Routes>
-          <Route path='/' Component={TaskList} />
+          <Route path='/task-management-react-app' Component={TaskList} />
           <Route path='add-task' Component={TaskForm} />
           <Route path='/*' Component={Error404} />
         </Routes>
