@@ -12,12 +12,12 @@ import Footer from './Components/Footer';
 function App() {
   return (
     <>
-      <Router basename="task-management-react-app">
+      <Router>
         <NavBar />
         <Routes>
-          <Route path='/task-management-react-app' Component={TaskList} />
+          <Route path='/' Component={TaskList} />
           <Route path='/add-task' Component={TaskForm} />
-          <Route path='/*' Component={TaskList} />
+          <Route path='/*' Component={Error404} />
         </Routes>
         <Footer/>
       </Router>

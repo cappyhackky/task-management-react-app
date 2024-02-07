@@ -131,20 +131,21 @@ const TaskList = () => {
       />)}
       <ToastContainer />
       <div className="row vh-100 gx-0">
+        <img src="/img/upcoming.png" alt="gasdg" />
         <div className="bg-mgreen col-md-3 d-flex align-items-center py-5">
           <div className="px-3 py-5">
             <div className="card hover shadow mb-3">
               <div className="card-body text-dark">
                 <div className="row" role='button'>
-                  <div className="col-md-4 text-center"><img src="/img/upcoming.png" className='img-fluid w-75' alt='View Complaint' /></div>
+                  <div className="col-md-4 text-center"><img src="/img/upcoming.png" className='img-fluid w-75' alt='upcoming' /></div>
                   <div className="col-md-8 d-flex align-items-center"><p className='h5 w-100 text-center'>Upcoming ({getUpcomingTasks()})</p></div>
                 </div>
               </div>
             </div>
             <div className="card hover shadow mb-3">
-              <div className="card-body text-dark">
+              <div className="card-body text-dark"> 
                 <div className="row" role='button'>
-                  <div className="col-md-4 text-center"><img src="/img/overdue.png" className='img-fluid w-75' alt='View Complaint' /></div>
+                  <div className="col-md-4 text-center"><img src="/img/overdue.png" className='img-fluid w-75' alt='overdue' /></div>
                   <div className="col-md-8 d-flex align-items-center"><p className='h5 w-100 text-center'>OverDue ({getDueTasks()})</p></div>
                 </div>
               </div>
@@ -152,7 +153,7 @@ const TaskList = () => {
             <div className="card hover shadow mb-3">
               <div className="card-body text-dark">
                 <div className="row" role='button'>
-                  <div className="col-md-4 text-center"><img src="/img/completed.png" className='img-fluid w-75' alt='View Complaint' /></div>
+                  <div className="col-md-4 text-center"><img src="/img/completed.png" className='img-fluid w-75' alt='completed' /></div>
                   <div className="col-md-8 d-flex align-items-center"><p className='h5 w-100 text-center'>Completed ({getCompletedTasks()})</p></div>
                 </div>
               </div>
